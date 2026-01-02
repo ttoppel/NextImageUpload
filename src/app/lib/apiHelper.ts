@@ -1,5 +1,5 @@
 import type { NextApiResponse } from 'next';
-import type {IApiResponse} from '@/types/types';
+import type {IApiResponse} from '../types/types';
 
 export function isValidEmail(email: string): boolean {
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;

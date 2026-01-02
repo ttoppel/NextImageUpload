@@ -1,6 +1,6 @@
 "use server";
 
-import { IApiResponse } from "@/types/types";
+import { IApiResponse } from "../types/types";
 
 const baseUrl = process.env.NEXT_APP_API_URL;
 

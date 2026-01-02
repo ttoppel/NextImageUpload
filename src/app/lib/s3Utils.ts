@@ -1,7 +1,7 @@
 import type { Readable } from 'node:stream';
-import type { TypedPromiseConstructor } from '@/types/typed-promise';
+import type { TypedPromiseConstructor } from '../types/typed-promise';
 
-import shortRandom from '@/utils/shortRandom';
+import shortRandom from '../utils/shortRandom';
 import { S3Client, PutObjectCommand, S3ServiceException, DeleteObjectCommand } from '@aws-sdk/client-s3';
 
 export type PayloadTypes = string | Uint8Array | Buffer | Readable;

@@ -4,9 +4,9 @@
 
 import { NextResponse, type NextRequest } from 'next/server';
 
-import ApiResponse, { ApiErrorResponse } from '@/lib/ApiResponse';
-import { FileKey, uploadImageFile } from '@/lib/s3Utils';
-import { reduceImageSizeToWebp, replaceFileExtension } from '@/lib/fileUtils';
+import ApiResponse, { ApiErrorResponse } from '../../lib/ApiResponse';
+import { FileKey, uploadImageFile } from '../../lib/s3Utils';
+import { reduceImageSizeToWebp, replaceFileExtension } from '../../lib/fileUtils';
 
 const blobToFile = (blob: Blob, fileName: string, mimeType: string): File => {
   if (blob instanceof File && blob.name === fileName) {

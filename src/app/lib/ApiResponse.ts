@@ -1,4 +1,4 @@
-import { toResponseBody } from '@/lib/apiHelper';
+import { toResponseBody } from './apiHelper';
 import type { NextApiResponse } from 'next';
 
 import { NextResponse } from 'next/server';
