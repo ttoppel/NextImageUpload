@@ -5,7 +5,9 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  compress: false,
   experimental: {
+    allowDevelopmentBuild: true,
     serverSourceMaps: true,
     serverActions: {
       bodySizeLimit: '10mb',
