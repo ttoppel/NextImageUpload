@@ -61,6 +61,7 @@ const processImageUpload = async (req: NextRequest): Promise<ApiResponse> => {
 
     console.error('Image processing about to upload file:', fileKey);
     const fileUrl = await uploadImageFile(fileKey.toString(), reducedBuffer);
+    console.error('Image processing fileUrl:', fileUrl);
     return new ApiResponse(200, { url: fileUrl, fileName }, 'Image uploaded successfully');
   } catch (err) {
     console.error('Image processing failed:', err);
