@@ -1,6 +1,6 @@
-"use server";
+'use server';
 
-import { IApiResponse } from "../types/types";
+import type { IApiResponse } from '@/types/types';
 
 const baseUrl = process.env.NEXT_APP_API_URL;
 
@@ -11,8 +11,7 @@ function applyBaseUrl(url: string): string {
     url = baseUrl + url;
   }
   return url;
-};
-
+}
 
 export const apiFetcherPost = async (
   url: string,
@@ -29,7 +28,7 @@ export const apiFetcherPost = async (
     const file = body as File;
     headers = {
       'Content-Type': file.type || 'application/octet-stream',
-       ...options.headers,
+      ...options.headers,
     };
   } else {
     headers = {
@@ -42,7 +41,7 @@ export const apiFetcherPost = async (
   const requestInit = {
     ...options,
     headers,
-    body
+    body,
   };
   const response = await fetch(url, requestInit);
   const bodyText = await response.text();
@@ -53,7 +52,11 @@ export const apiFetcherPost = async (
 
 export async function imageUploadFile(file: File): Promise<IApiResponse> {
   try {
-    const res = await apiFetcherPost('/api/image', file, { method: 'POST', cache: 'no-cache', headers: { 'x_file_name': file.name, 'x_mime_type': file.type } });
+    const res = await apiFetcherPost('/api/image', file, {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: { x_file_name: file.name, x_mime_type: file.type },
+    });
     return res;
   } catch (error) {
     return { success: false, message: 'Image upload failed', error };
@@ -62,7 +65,11 @@ export async function imageUploadFile(file: File): Promise<IApiResponse> {
 
 export async function imageUploadBlob(blob: Blob, fileName: string, mimeType: string): Promise<IApiResponse> {
   try {
-    const res = await apiFetcherPost('/api/image', blob, { method: 'POST', cache: 'no-cache', headers: { 'x_file_name': fileName, 'x_mime_type': mimeType } });
+    const res = await apiFetcherPost('/api/image', blob, {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: { x_file_name: fileName, x_mime_type: mimeType },
+    });
     return res;
   } catch (error) {
     return { success: false, message: 'Image upload failed', error };

@@ -1,4 +1,4 @@
-import { toResponseBody } from './apiHelper';
+import { toResponseBody } from '@/lib/apiHelper';
 import type { NextApiResponse } from 'next';
 
 import { NextResponse } from 'next/server';
@@ -14,7 +14,7 @@ const applyNextApiResponse = (resp: NextResponse, nextApiResp: NextApiResponse |
     });
 };
 class ApiResponse extends NextResponse {
-  constructor (
+  constructor(
     status: number,
     payload?: unknown,
     message?: string,
@@ -22,7 +22,7 @@ class ApiResponse extends NextResponse {
     fieldErrorMapping?: Map<string, string[]>,
     apiResponse?: NextApiResponse
   ) {
-     if (error instanceof Object && 'message' in error) {
+    if (error instanceof Object && 'message' in error) {
       const msg = error['message'] as string;
       error = message = msg;
     }

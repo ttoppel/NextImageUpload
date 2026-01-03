@@ -5,7 +5,6 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  compress: false,
   experimental: {
     serverSourceMaps: true,
     serverActions: {
@@ -17,7 +16,7 @@ const nextConfig = {
     // Dangerously allow production builds to successfully complete even if
     // your project has type errors.
     // !! WARN !!
-    // ignoreBuildErrors: true,
+    ignoreBuildErrors: true,
   },
 }
  

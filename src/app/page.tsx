@@ -1,7 +1,8 @@
-'use client'
+'use client';
 
-import { useState } from "react";
-import { imageUploadFile } from "./actions/image";
+import { useState } from 'react';
+import { imageUploadFile } from '@/actions/image';
+import { Button, Input } from '@heroui/react';
 
 interface ImageResponseData {
   url?: string;
@@ -44,11 +45,9 @@ export default function Home() {
       const response = await imageUploadFile(selectedFile);
       if (response.success) {
         const data = response.payload as ImageResponseData;
-        setImageUrl(data.url)
+        setImageUrl(data.url);
         setMessage(`File uploaded successfully: ${data.url}`);
-      }
-      else
-        setMessage(`File upload Failure: ${response.message}, ${response.error}`)
+      } else setMessage(`File upload Failure: ${response.message}, ${response.error}`);
     } catch (error) {
       setMessage('File upload failed!');
       console.error('Upload error:', error);
@@ -69,17 +68,17 @@ export default function Home() {
     } else {
       return <p>Choose a file before uploading.</p>;
     }
-  }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <div>
           <div>
-            <input type="file" title="Choose a File: " onChange={handleFileChange} />
+            <Input type="file" title="Choose a File: " onChange={handleFileChange} />
             <br />
             <br />
-            <button onClick={onFileUpload}>Upload!</button>
+            <Button onPress={onFileUpload}>Upload!</Button>
             <br />
             <br />
           </div>

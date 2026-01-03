@@ -1,12 +1,12 @@
 // api/artist/image/
 
-'use server'
+'use server';
 
 import { NextResponse, type NextRequest } from 'next/server';
 
-import ApiResponse, { ApiErrorResponse } from '../../lib/ApiResponse';
-import { FileKey, uploadImageFile } from '../../lib/s3Utils';
-import { reduceImageSizeToWebp, replaceFileExtension } from '../../lib/fileUtils';
+import ApiResponse, { ApiErrorResponse } from '@/lib/ApiResponse';
+import { FileKey, uploadImageFile } from '@/lib/s3Utils';
+import { reduceImageSizeToWebp, replaceFileExtension } from '@/lib/fileUtils';
 
 const blobToFile = (blob: Blob, fileName: string, mimeType: string): File => {
   if (blob instanceof File && blob.name === fileName) {
@@ -15,10 +15,10 @@ const blobToFile = (blob: Blob, fileName: string, mimeType: string): File => {
 
   const file: File = new File(
     [blob], // The blob content placed in an array
-    fileName,  // The name of the file
+    fileName, // The name of the file
     {
-      type: mimeType,          // The MIME type
-      lastModified: Date.now()     // The last modified date in milliseconds
+      type: mimeType, // The MIME type
+      lastModified: Date.now(), // The last modified date in milliseconds
     }
   );
   return file;
@@ -53,11 +53,11 @@ const processImageUpload = async (req: NextRequest): Promise<ApiResponse> => {
     }
 
     console.error('Image processing about to reduceImageSizeToWebp:', file);
-    const reducedBuffer = await reduceImageSizeToWebp(file, 500, 500)
+    const reducedBuffer = await reduceImageSizeToWebp(file, 500, 500);
     console.error('Image processing done reduceImageSizeToWebp:', reducedBuffer);
 
     const fileName = replaceFileExtension(file.name, '.webp');
-    const fileKey = new FileKey("testImageUpload", fileName, 'md', undefined, true);
+    const fileKey = new FileKey('testImageUpload', fileName, 'md', undefined, true);
 
     console.error('Image processing about to upload file:', fileKey);
     const fileUrl = await uploadImageFile(fileKey.toString(), reducedBuffer);

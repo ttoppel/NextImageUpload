@@ -1,7 +1,7 @@
 import type { Readable } from 'node:stream';
-import type { TypedPromiseConstructor } from '../types/typed-promise';
+import type { TypedPromiseConstructor } from '@/types/typed-promise';
 
-import shortRandom from '../utils/shortRandom';
+import shortRandom from '@/utils/shortRandom';
 import { S3Client, PutObjectCommand, S3ServiceException, DeleteObjectCommand } from '@aws-sdk/client-s3';
 
 export type PayloadTypes = string | Uint8Array | Buffer | Readable;
@@ -41,7 +41,7 @@ export class FileKey implements IFileKey {
   idPrefix?: string;
   size?: string;
 
-  constructor (
+  constructor(
     folder: string = '',
     fname: string = '',
     sizeTag: string | undefined = undefined,
@@ -230,7 +230,7 @@ export const uploadImageFile = async (fileName: string, fileOrBuffer: File | Pay
       reject(new Error('Invalid/Missing environment variable: "S3_BUCKET"'));
     } else {
       try {
-        let imageBuffer = fileOrBuffer instanceof File ? await fileOrBuffer.arrayBuffer() : fileOrBuffer as PayloadTypes;
+        let imageBuffer = fileOrBuffer instanceof File ? await fileOrBuffer.arrayBuffer() : (fileOrBuffer as PayloadTypes);
         if (imageBuffer instanceof ArrayBuffer) {
           imageBuffer = new Uint8Array(imageBuffer);
         }
@@ -270,7 +270,7 @@ export const uploadImageData = async (
   inputData: string | Uint8Array | Buffer | Readable
 ): Promise<string> =>
   new (Promise as TypedPromiseConstructor<string, Error>)(async (resolve, reject) => {
-    'use server'
+    'use server';
 
     if (!process.env.S3_BUCKET) {
       console.error('🔴 S3_BUCKET is not defined.');
@@ -313,7 +313,7 @@ export const uploadImageData = async (
 
 export const deleteFile = async (fileKey: FileKey): Promise<string> =>
   new (Promise as TypedPromiseConstructor<string, Error>)(async (resolve, reject) => {
-    'use server'
+    'use server';
 
     if (!process.env.S3_BUCKET) {
       console.error('🔴 S3_BUCKET is not defined.');
